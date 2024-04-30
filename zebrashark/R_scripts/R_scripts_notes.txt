@@ -1,0 +1,53 @@
+### Description of zebra shark DNAm analysis in R ###
+
+## Primary objectives:
+
+#_______________________________________________________________________________
+# (1) Read bam files (deduplicated and sorted) into R with methylkit to generate \
+# methylation count data (# Cs and Ts at each covered site) in useable format
+
+## Script used for this step: methylkit_zebrashark.R OR
+## for speeding up the process of reading a large number of files you can use \
+## multiple scripts (in processBismark folder) to read in samples individually, \
+## then put all the methylRaw objects (result of reading in bam file) into one \
+## methylRaw list (with methylkit_zebrashark_raw.R) which can be used for \
+## subsequent analyses
+
+#_______________________________________________________________________________
+# (2) Generate a percent methylation matrix that can be used to visualize DNAm \
+# patterns and be used as input into the impute package to get a methylation \
+# matrix without missing values which is needed to test for correlations with \
+# age and fit the elastic net regularized regression (predictive model)
+
+## Script used for this step: methylkit_zebrashark_percmeth.R
+
+#_______________________________________________________________________________
+# (3) Test for correlations between DNAm status and age across samples to get \
+# a sense for broad age-associated patterns genome-wide
+
+## Script used for this step: zebrashark_agecorr.R - uses WGCNA package and \
+## the corAndPvalue function to test for correlations with age across all sites
+
+#_______________________________________________________________________________
+# (4) Fit predictive model of age using elastic net regularized regression \
+# I performed model fitting and testing in a few different ways - (a) I used \
+# only captive individuals and performed a leave-one-out approach in which each \
+# sample served as an independent test set in the iteration in which it was left \
+# out of model fitting, (b) I used all captive individuals as the training set \
+# and tested the performance of the single resulting model on the wild-derived \
+# individuals, and (c) I repeated the approaches in (a) and (b) but limited the \
+# potential CpGs serving as predictors to those exhibiting correlations with age
+
+## Scripts used for this step: (a) zebrashark_loocv.R and zebrashark_loocv_2.R
+## (b) zebrashark_glmnet_full.R
+## (c) zebrashark_ageassoc_loocv.R and zebrashark_ageassoc_wild.R
+
+
+#_______________________________________________________________________________
+# (5) Annotation of age-associated CpGs and/or CpGs included in the predictive \
+# models (i.e. 'clocks') - this part of the analysis is in progress but I \
+# developed various scripts (still quite messy) as I was working through this \
+# with subsets of the dataset
+
+## Scripts used for this step: methylkit_zebrashark_annot.R
+## and methylkit_zebrashark_vizannot.R
