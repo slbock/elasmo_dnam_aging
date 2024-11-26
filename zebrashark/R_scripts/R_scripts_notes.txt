@@ -3,7 +3,7 @@
 ## Primary objectives:
 
 #_______________________________________________________________________________
-# (1) Read bam files (deduplicated and sorted) into R with methylkit to generate \
+# (1a) Read bam files (deduplicated and sorted) into R with methylkit to generate \
 # methylation count data (# Cs and Ts at each covered site) in useable format
 
 ## Script used for this step: methylkit_zebrashark.R OR
@@ -12,6 +12,12 @@
 ## then put all the methylRaw objects (result of reading in bam file) into one \
 ## methylRaw list (with methylkit_zebrashark_raw.R) which can be used for \
 ## subsequent analyses
+
+# (1b) Filter CpG sites by required coverage and sample representation. I've \
+# generally used a dataset including CpGs covered by at least 5x in 80% of \
+# samples but will test different filtering requirements 
+
+## Script used for this step: methylkit_zebrashark_filtersamples.R
 
 #_______________________________________________________________________________
 # (2) Generate a percent methylation matrix that can be used to visualize DNAm \
