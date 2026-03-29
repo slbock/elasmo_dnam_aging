@@ -8,7 +8,7 @@ library(WGCNA)
 install.packages("reshape2", repos='http://cran.us.r-project.org', dependencies = TRUE)
 library(reshape2)
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
+load("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
 
 zebrashark.5x.percmeth.53S.impute.data <- zebrashark.5x.percmeth.53S.impute$data
 zebrashark.5x.percmeth.53S.impute.data.df <- data.frame(zebrashark.5x.percmeth.53S.impute.data)
@@ -35,12 +35,12 @@ ncol(zebrashark.subset.percmeth.captive.df)
 
 zebrashark.subset.percmeth.captive.df.t <- t(zebrashark.subset.percmeth.captive.df)
 
-write.csv(zebrashark.subset.percmeth.captive.df.t, file="/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.captive.csv")
+write.csv(zebrashark.subset.percmeth.captive.df.t, file="/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.captive.csv")
 
 # test for and add age correlation information
 # based on the old example, the input for the corAndPvalue function is a matrix of values, in this case perc methylation values, where each column is a locus, and each row is a sample
 # the second input is the variable to test a correlation with, if temperature, then this a dataframe with one column of 24 temperature values
-zebrashark_factors_cc<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
+zebrashark_factors_cc<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
 
 age<-zebrashark_factors_cc$est.age
 age_d<-as.data.frame(age)
@@ -56,7 +56,7 @@ age.cp.spearman.cor<-age.cp.spearman$cor
 age.cp.spearman.df<-cbind(age.cp.spearman.pval, age.cp.spearman.pval.adj,age.cp.spearman.cor)
 colnames(age.cp.spearman.df)<-c("pval", "fdr", "cor")
 
-write.csv(age.cp.spearman.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.spearman.all.csv")
+write.csv(age.cp.spearman.df, file="/dir/work/ZEBRA_SHARK/R/age.cp.spearman.all.csv")
 
 # TEST FOR PEARSON CORRELATIONS
 age.cp.pearson<-corAndPvalue(zebrashark.subset.percmeth.captive.df, age_d, method="pearson")
@@ -67,4 +67,4 @@ age.cp.pearson.cor<-age.cp.pearson$cor
 age.cp.pearson.df<-cbind(age.cp.pearson.pval, age.cp.pearson.pval.adj,age.cp.pearson.cor)
 colnames(age.cp.pearson.df)<-c("pval", "fdr", "cor")
 
-write.csv(age.cp.pearson.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.pearson.all.csv")
+write.csv(age.cp.pearson.df, file="/dir/work/ZEBRA_SHARK/R/age.cp.pearson.all.csv")

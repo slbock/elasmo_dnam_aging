@@ -8,7 +8,7 @@ library(WGCNA)
 library(reshape2)
 library(glmnet)
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
+load("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
 
 zebrashark.5x.percmeth.53S.impute.data <- zebrashark.5x.percmeth.53S.impute$data
 zebrashark.5x.percmeth.53S.impute.data.df <- data.frame(zebrashark.5x.percmeth.53S.impute.data)
@@ -42,10 +42,10 @@ ncol(zebrashark.subset.percmeth.captive.df)
 
 
 # read in metadata for captive individuals only
-zebrashark_factors_cc<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
+zebrashark_factors_cc<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
 
 # read in metadata for wild individuals only
-zebrashark_factors_w<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors_wild.csv")
+zebrashark_factors_w<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark_factors_wild.csv")
 
 # create dataframe only including age data and GN identifiers
 zebrashark_age_cc<-subset(zebrashark_factors_cc, select=c(gn.number, est.age))
@@ -63,10 +63,10 @@ pearson_captive<-corAndPvalue(meth_captive_loc_t, zebrashark_factors_cc$est.age,
 
 # add spearman correlations to original methylation dataset
 zebrashark.subset.percmeth.captive.df<-cbind(zebrashark.subset.percmeth.captive.df, cor=spearman_captive$cor, pcor=pearson_captive$cor)
-write.csv(zebrashark.subset.percmeth.captive.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_subset_percmeth_captive.csv")
+write.csv(zebrashark.subset.percmeth.captive.df, file="/dir/work/ZEBRA_SHARK/R/zebrashark_subset_percmeth_captive.csv")
 
 zebrashark.subset.percmeth.wild.df<-cbind(zebrashark.subset.percmeth.wild.df, cor=spearman_captive$cor, pcor=pearson_captive$cor)
-write.csv(zebrashark.subset.percmeth.wild.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_subset_percmeth_wild.csv")
+write.csv(zebrashark.subset.percmeth.wild.df, file="/dir/work/ZEBRA_SHARK/R/zebrashark_subset_percmeth_wild.csv")
 
 # subset methylation data to only include age-associated sites
 meth_captive_loc_ageassoc<-subset(zebrashark.subset.percmeth.captive.df, abs(pcor) > 0.5)
@@ -86,4 +86,4 @@ meth_wild_loc_ageassoc_t<-as.matrix(t(meth_wild_loc_ageassoc[,1:18]))
 predict_age_captive<-predict(model, meth_captive_loc_ageassoc_t, s=best_lambda)
 predict_age_wild<-predict(model, meth_wild_loc_ageassoc_t, s=best_lambda)
 
-save(list = ls(all.names = TRUE), file = "/scratch/sb61937/work/ZEBRA_SHARK/R/glmnet_all_pearson_wild.RData")
+save(list = ls(all.names = TRUE), file = "/dir/work/ZEBRA_SHARK/R/glmnet_all_pearson_wild.RData")

@@ -9,10 +9,10 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=72G
 #SBATCH --time=120:00:00
-#SBATCH --output=/scratch/sb61937/scripts/bismark_genomeprep_zebrashark_1.0.o
-#SBATCH --error=/scratch/sb61937/scripts/bismark_genomeprep_zebrashark_1.0.e
+#SBATCH --output=/dir/scripts/bismark_genomeprep_zebrashark_1.0.o
+#SBATCH --error=/dir/scripts/bismark_genomeprep_zebrashark_1.0.e
 
-cd /scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome
+cd /dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome
 
 # download  Stegostoma tigrinum genome and annotation
 # curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_030684315.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_030684315.1.zip" -H "Accept: application/zip"
@@ -30,4 +30,4 @@ module load Bowtie2/2.4.5-GCC-11.3.0
 #first, the genome needs to be bisulfite converted and indexed to allow Bowtie alignments
 #prepare genome, note bowtie1 and bowtie2 require distinct indexing steps since their indexes are not compatible
 #genome preparation step only needs to be preformed once
-bismark_genome_preparation --bowtie2 --verbose /scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome
+bismark_genome_preparation --bowtie2 --verbose /dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome

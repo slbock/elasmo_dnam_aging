@@ -9,7 +9,7 @@ library(reshape2)
 library(glmnet)
 
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
+load("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
 
 zebrashark.5x.percmeth.53S.impute.data <- zebrashark.5x.percmeth.53S.impute$data
 zebrashark.5x.percmeth.53S.impute.data.df <- data.frame(zebrashark.5x.percmeth.53S.impute.data)
@@ -43,7 +43,7 @@ nrow(zebrashark.percmeth.captive.training.df)
 ncol(zebrashark.percmeth.captive.training.df)
 
 # read in metadata for captive individuals only
-zebrashark_factors_cc<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
+zebrashark_factors_cc<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
 
 zebrashark_factors_test<- subset(zebrashark_factors_cc, gn.number %in% zebrashark_test)
 zebrashark_factors_training<- subset(zebrashark_factors_cc, !(gn.number %in% zebrashark_test))
@@ -71,4 +71,4 @@ predict_age_test<-predict(model, meth_test_t, s=best_lambda)
 
 rm(list=setdiff(ls(), c("en_coeff", "predict_age_train", "predict_age_test", "best_lambda")))
 
-save(list = ls(all.names = TRUE), file = "/scratch/sb61937/work/ZEBRA_SHARK/R/glmnet_single_train_test.RData")
+save(list = ls(all.names = TRUE), file = "/dir/work/ZEBRA_SHARK/R/glmnet_single_train_test.RData")

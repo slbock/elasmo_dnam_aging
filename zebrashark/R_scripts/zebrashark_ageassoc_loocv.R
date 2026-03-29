@@ -12,7 +12,7 @@ library(glmnet)
 options(scipen=50)
 
 # load percent methylation data for covered, filtered loci (n = 950,534 CpGs)
-zebrashark.subset.percmeth.df<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark.5x.percmeth.removinvar.csv")
+zebrashark.subset.percmeth.df<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark.5x.percmeth.removinvar.csv")
 head(zebrashark.subset.percmeth.df)
 rownames(zebrashark.subset.percmeth.df)<-zebrashark.subset.percmeth.df$X
 zebrashark.subset.percmeth.df$loc<-zebrashark.subset.percmeth.df$X
@@ -26,7 +26,7 @@ nrow(zebrashark.subset.percmeth.captive.df)
 ncol(zebrashark.subset.percmeth.captive.df)
 
 # read in metadata for captive individuals only
-zebrashark_factors_cc<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
+zebrashark_factors_cc<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark_factors_cc.csv")
 
 # create dataframe only including age data and GN identifiers
 zebrashark_age_cc<-subset(zebrashark_factors_cc, select=c(gn.number, est.age))
@@ -246,4 +246,4 @@ nrow(subset(GN22894_coeff_df, abs(coeff) > 0))
 
 
 
-save(list = ls(all.names = TRUE), file = "/scratch/sb61937/work/ZEBRA_SHARK/R/glmnet_all_pearson_ageassoc.RData")
+save(list = ls(all.names = TRUE), file = "/dir/work/ZEBRA_SHARK/R/glmnet_all_pearson_ageassoc.RData")

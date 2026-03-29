@@ -8,7 +8,7 @@ library(WGCNA)
 library(reshape2)
 library(glmnet)
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
+load("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
 
 zebrashark.5x.percmeth.53S.impute.data <- zebrashark.5x.percmeth.53S.impute$data
 zebrashark.5x.percmeth.53S.impute.data.df <- data.frame(zebrashark.5x.percmeth.53S.impute.data)
@@ -23,7 +23,7 @@ head(zebrashark.subset.percmeth.df)
 
 rm(zebrashark.5x.percmeth.53S.impute, zebrashark.5x.percmeth.53S.impute.data, zebrashark.5x.percmeth.53S.impute.data.df)
 
-zebrashark_factors <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
+zebrashark_factors <- read.csv("/dir/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
 
 #### divide dataframe into pre- and post-maturity ('young' and 'old' respectively) ####
 ## YOUNG ##
@@ -109,4 +109,4 @@ rm(list=setdiff(ls(), c("young_en_coeff", "young_predict_age_young", "young_pred
                         "oldc_en_coeff", "oldc_predict_age_young", "oldc_predict_age_oldc", "oldc_predict_age_oldw", "oldc_best_lambda",
                         "zebrashark.old.c.age", "zebrashark.old.w.age", zebrashark.young.age)))
 
-save(list = ls(all.names = TRUE), file = "/scratch/sb61937/work/ZEBRA_SHARK/R/glmnet_young_old.RData")
+save(list = ls(all.names = TRUE), file = "/dir/work/ZEBRA_SHARK/R/glmnet_young_old.RData")

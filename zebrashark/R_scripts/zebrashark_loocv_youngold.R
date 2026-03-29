@@ -8,7 +8,7 @@ library(WGCNA)
 library(reshape2)
 library(glmnet)
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
+load("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.impute.RData")
 
 zebrashark.5x.percmeth.53S.impute.data <- zebrashark.5x.percmeth.53S.impute$data
 zebrashark.5x.percmeth.53S.impute.data.df <- data.frame(zebrashark.5x.percmeth.53S.impute.data)
@@ -23,7 +23,7 @@ head(zebrashark.subset.percmeth.df)
 
 rm(zebrashark.5x.percmeth.53S.impute, zebrashark.5x.percmeth.53S.impute.data, zebrashark.5x.percmeth.53S.impute.data.df)
 
-zebrashark_factors <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
+zebrashark_factors <- read.csv("/dir/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
 
 #### divide dataframe into pre- and post-maturity ('young' and 'old' respectively) ####
 ## YOUNG ##
@@ -206,4 +206,4 @@ rm(list=setdiff(ls(), c("GN22651_coeff_df", "GN22652_coeff_df", "GN22872_coeff_d
                          "LOO_predicttrain_GN22892", "LOO_predicttrain_GN22894", "LOO_predicttrain_GN22895", "LOO_predicttrain_GN22900", "LOO_predicttrain_GN22902", "LOO_predicttrain_GN22904",
                          "LOO_predicttrain_GN22927", "LOO_predicttrain_GN22928")))
 
-save(list = ls(all.names = TRUE), file = "/scratch/sb61937/work/ZEBRA_SHARK/R/young_glmnet_loocv.RData")
+save(list = ls(all.names = TRUE), file = "/dir/work/ZEBRA_SHARK/R/young_glmnet_loocv.RData")

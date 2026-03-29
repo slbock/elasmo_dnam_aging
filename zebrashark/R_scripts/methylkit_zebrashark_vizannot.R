@@ -11,8 +11,8 @@ library(car)
 
 # load filtered subsets
 
-zebrashark.5x.percmeth.53S <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.csv")
-zebrashark_factors <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
+zebrashark.5x.percmeth.53S <- read.csv("/dir/work/ZEBRA_SHARK/R/filteredByCov_ouput/zebrashark.5x.percmeth.53S.csv")
+zebrashark_factors <- read.csv("/dir/work/ZEBRA_SHARK/R/zebrashark_factors.csv")
 
 # make genomic locus the rowname
 rownames(zebrashark.5x.percmeth.53S) <- zebrashark.5x.percmeth.53S[,1]
@@ -22,17 +22,17 @@ head(percmeth_53S)
 str(percmeth_53S)
 
 # get percent methylation of most significant age-correlated sites
-age_cp_pearson_sig <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.pearson.sig.csv")
+age_cp_pearson_sig <- read.csv("/dir/work/ZEBRA_SHARK/R/age.cp.pearson.sig.csv")
 colnames(age_cp_pearson_sig) <- c("locus", "pval", "fdr", "cor")
 
 age_cp_pearson_sig_meth <- merge(age_cp_pearson_sig, percmeth_53S, by.x="locus", by.y="row.names")
-write.csv(age_cp_pearson_sig_meth, file="/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.pearson.sig.meth.csv")
+write.csv(age_cp_pearson_sig_meth, file="/dir/work/ZEBRA_SHARK/R/age.cp.pearson.sig.meth.csv")
 
-age_cp_spearman_sig <- read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.spearman.sig.csv")
+age_cp_spearman_sig <- read.csv("/dir/work/ZEBRA_SHARK/R/age.cp.spearman.sig.csv")
 colnames(age_cp_spearman_sig) <- c("locus", "pval", "fdr", "cor")
 
 age_cp_spearman_sig_meth <- merge(age_cp_spearman_sig, percmeth_53S, by.x="locus", by.y="row.names")
-write.csv(age_cp_spearman_sig_meth, file="/scratch/sb61937/work/ZEBRA_SHARK/R/age.cp.spearman.sig.meth.csv")
+write.csv(age_cp_spearman_sig_meth, file="/dir/work/ZEBRA_SHARK/R/age.cp.spearman.sig.meth.csv")
 
 #percmeth_53S_t <-t(percmeth_53S)
 #str(percmeth_53S_t)
@@ -55,8 +55,8 @@ write.csv(age_cp_spearman_sig_meth, file="/scratch/sb61937/work/ZEBRA_SHARK/R/ag
 #pc1.2.df <- cbind(pc1, pc2, est_age, type_c)
 #colnames(pc1.2.df) <- c("pc1", "pc2", "est_age", "type_c")
 
-#save(pc1.2.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/pc1_2_df.Rdata")
-#save(pca_all, file="/scratch/sb61937/work/ZEBRA_SHARK/R/pca_all.Rdata")
+#save(pc1.2.df, file="/dir/work/ZEBRA_SHARK/R/pc1_2_df.Rdata")
+#save(pca_all, file="/dir/work/ZEBRA_SHARK/R/pca_all.Rdata")
 
 
 # create PCA based on methylation of all filtered sites but with zero variance sites removed
@@ -72,5 +72,5 @@ write.csv(age_cp_spearman_sig_meth, file="/scratch/sb61937/work/ZEBRA_SHARK/R/ag
 #pc1.2.sc.df <- cbind(pc1_sc, pc2_sc, est_age, type_c)
 #colnames(pc1.2.sc.df) <- c("pc1", "pc2", "est_age", "type_c")
 
-#save(pc1.2.sc.df, file="/scratch/sb61937/work/ZEBRA_SHARK/R/pc1_2_sc_df.Rdata")
-#save(pca_all_sc, file="/scratch/sb61937/work/ZEBRA_SHARK/R/pca_all_sc.Rdata")
+#save(pc1.2.sc.df, file="/dir/work/ZEBRA_SHARK/R/pc1_2_sc_df.Rdata")
+#save(pca_all_sc, file="/dir/work/ZEBRA_SHARK/R/pca_all_sc.Rdata")

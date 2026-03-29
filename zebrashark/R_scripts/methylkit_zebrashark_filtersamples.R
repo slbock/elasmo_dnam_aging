@@ -8,7 +8,7 @@ library(genomation)
 ## FILTER BY COVERAGE ##
 
 # Filter by coverage
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/filtered.zebrashark.obj.5x.RData")
+load("/dir/work/ZEBRA_SHARK/R/filtered.zebrashark.obj.5x.RData")
 
 # NORMALIZE COVERAGE
 filtered.zebrashark.obj.5x.norm <- normalizeCoverage(filtered.zebrashark.obj.5x)

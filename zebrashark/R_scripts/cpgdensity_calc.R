@@ -9,8 +9,8 @@ library(car)
 library(ggplot2)
 
 
-windows_200bp<-read.table("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/windows.bed")
-CpG_sSteTig4<-read.table("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/CpG.sSteFas4_shorter.bed")
+windows_200bp<-read.table("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/windows.bed")
+CpG_sSteTig4<-read.table("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/CpG.sSteFas4_shorter.bed")
 
 windows_200bp_gr<- makeGRangesFromDataFrame(windows_200bp, keep.extra.columns=FALSE, ignore.strand=TRUE, seqinfo=NULL,
                                                            seqnames.field="V1",
@@ -40,7 +40,7 @@ sum(windows_200bp_count$number.CpGs)
 windows_200bp_count <- windows_200bp_count %>%
                       mutate(CpG_bin = cut(number.CpGs, breaks=c(seq(-5, 100, 5))))
 
-write.csv(windows_200bp_count, file="/scratch/sb61937/work/ZEBRA_SHARK/R/windows_200bp_count.csv")
+write.csv(windows_200bp_count, file="/dir/work/ZEBRA_SHARK/R/windows_200bp_count.csv")
 
 cpg_density_window<-ggplot(data=windows_200bp_count, aes(x=CpG_bin)) + geom_bar()
 save(cpg_density_window, file="cpg_density_window.RData")
@@ -49,7 +49,7 @@ save(cpg_density_window, file="cpg_density_window.RData")
 ## characterize these covered CpGs by their local CpG density of the window they overlap
 
 # test file of covered CpGs
-cov_filter_cpgs<-read.csv("/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.csv")
+cov_filter_cpgs<-read.csv("/dir/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.csv")
 
 cov_filter_cpgs_gr<- makeGRangesFromDataFrame(cov_filter_cpgs, keep.extra.columns=FALSE, ignore.strand=TRUE, seqinfo=NULL,
                                         seqnames.field="seqnames",
@@ -71,4 +71,4 @@ cov_filter_cpgs$queryHits <-cov_filter_cpgs_overlap_df$queryHits[match(cov_filte
 # now that you have the row number of your corresponding windows, you can merge your covered cpgs dataframe with the windows information
 cov_filter_cpgs<-merge(cov_filter_cpgs, windows_200bp_count, by.x="queryHits", by.y="row.n", all.x=TRUE, all.y=FALSE)
 
-write.csv(cov_filter_cpgs, file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.density")
+write.csv(cov_filter_cpgs, file="/dir/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.density")

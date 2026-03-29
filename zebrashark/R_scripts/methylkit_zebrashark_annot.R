@@ -7,13 +7,10 @@ library(WGCNA)
 library(ggplot2)
 
 
-load("/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark.5x.meth.destr.all.RData")
+load("/dir/work/ZEBRA_SHARK/R/zebrashark.5x.meth.destr.all.RData")
 
 # remove invariable
-zebrashark.5x.all.removinvar<-read.csv(file="/scratch/sb61937/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.csv")
-
-# now that the dataset is filtered the way I want, I now need to generate a methylBase object from this so I can run differential methylation analysis
-# I think the easiest way to do this is generate a GRanges object from the dataframe, then use the selectByOverlap on the methylBase object
+zebrashark.5x.all.removinvar<-read.csv(file="/dir/work/ZEBRA_SHARK/R/zebrashark.5x.all.removinvar.csv")
 
 # Need to create GRanges from dataframe
 zebrashark.5x.all.removinvar.gr<- makeGRangesFromDataFrame(zebrashark.5x.all.removinvar, keep.extra.columns=FALSE, ignore.strand=TRUE, seqinfo=NULL,
@@ -28,7 +25,6 @@ zebrashark.5x.meth.destr.subset<-selectByOverlap(zebrashark.5x.meth.destr.all, z
 zebrashark.subset<-zebrashark.5x.meth.destr.subset
 dim(zebrashark.subset)
 
-## Do not need to generate percent methylation matrix - we already have that
 
 ## Determine overlap status for all covered/filtered CpGs with genes and CpG islands, shores, shelves, or open sea
 
@@ -41,7 +37,7 @@ dim(zebrashark.subset)
 # I should also probably run the function annotateWithGeneParts to verify the percentages match, and this use of Genomic Ranges is doing what I think it's doing
 # input annotation files do not have underscores in the scaffold names - I processed these previously
 
-annot<-readTranscriptFeatures("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/sSteTig4_annot_edited.bed")
+annot<-readTranscriptFeatures("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/sSteTig4_annot_edited.bed")
 exons<-annot$exons
 introns<-annot$introns
 promoters<-annot$promoters
@@ -109,7 +105,7 @@ annotateWithGeneParts(zebrashark.5x.all.removinvar.gr, annot,
 ### Determine overlap with CpG islands
 
 # read in bed files with coordinates for islands
-cpg.islands <- read.table("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/sSteTig4_cpgisland_edited.bed")
+cpg.islands <- read.table("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/sSteTig4_cpgisland_edited.bed")
 cpg.islands$name <-"island"
 # name the columns
 names(cpg.islands) <- c("seqnames", "start", "end", "name")
@@ -147,7 +143,7 @@ annotateWithFeature(zebrashark.5x.all.removinvar.gr, cpg.islands.gr, strand = FA
 
 
 # read in bed files with coordinates for shores
-cpg.shores <- read.table("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/edited_sSteTig4_cpg_shores.bed")
+cpg.shores <- read.table("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/edited_sSteTig4_cpg_shores.bed")
 cpg.shores$name <-"shores"
 
 # name the columns
@@ -186,7 +182,7 @@ annotateWithFeature(zebrashark.5x.all.removinvar.gr, cpg.shores.gr, strand = FAL
 
 
 # read in bed files with coordinates for shelves
-cpg.shelves <- read.table("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/edited_sSteTig4_cpg_shelves.bed")
+cpg.shelves <- read.table("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Genome/edited_sSteTig4_cpg_shelves.bed")
 cpg.shelves$name <-"shelves"
 
 # name the columns

@@ -10,11 +10,11 @@ library(GenomicRanges)
 #-------------------------------------------------------------------------------#
 ## READ IN FILES & PROCESS FILES ##
 # First step is to read the sorted bam files into methylkit
-file.GN22905 <-list("/scratch/sb61937/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Sorted_Bam/GN22905_sort.bam")
+file.GN22905 <-list("/dir/work/ZEBRA_SHARK/Bismark/sSteTig4_Genome/Sorted_Bam/GN22905_sort.bam")
 
 zebrashark.obj.GN22905 <-processBismarkAln(location=file.GN22905, sample.id= list("GN22905"),
                                      assembly="sSteTig4", save.folder=NULL, save.context=NULL, read.context="CpG",
                                      nolap=FALSE, mincov=1, minqual=20, phred64=FALSE,
                                      treatment=c(1))
 
-save(zebrashark.obj.GN22905, file="/scratch/sb61937/work/ZEBRA_SHARK/R/methylRaw.GN22905.RData")
+save(zebrashark.obj.GN22905, file="/dir/work/ZEBRA_SHARK/R/methylRaw.GN22905.RData")
